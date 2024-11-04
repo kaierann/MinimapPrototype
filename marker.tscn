@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://i6yprffogw5o"]
+
+[ext_resource type="Texture2D" uid="uid://baxj0l1h7boh2" path="res://enemy.png" id="1_qnlu3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj7is"]
+radius = 8.0
+
+[node name="Marker" type="Area2D" groups=["enemy"]]
+collision_layer = 96
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qnlu3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rj7is")

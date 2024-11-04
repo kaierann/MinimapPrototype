@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bicx5bb35kcuv"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_bsc3h"]
+[ext_resource type="Texture2D" uid="uid://bb6d8hdnqsxtn" path="res://icon.svg" id="1_wq8q7"]
+[ext_resource type="PackedScene" uid="uid://br86le2x53ye" path="res://radar.tscn" id="3_hbbqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in11r"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_bsc3h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_wq8q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_in11r")
+
+[node name="Radar" parent="." instance=ExtResource("3_hbbqo")]
+
+[node name="SensorRotation" parent="Radar/CanvasLayer/RadarUI/Radar" index="1"]
+visible = false
+
+[node name="Sensor" parent="Radar/CanvasLayer/RadarUI/Radar/SensorRotation" index="0"]
+position = Vector2(0.00263166, -47.75)
+scale = Vector2(0.0157895, 96.5)
+
+[node name="CollisionShape2D" parent="Radar/CanvasLayer/RadarUI/Radar/SensorRotation/Area2D" index="0"]
+position = Vector2(0.00526321, -48.5)
+
+[editable path="Radar"]

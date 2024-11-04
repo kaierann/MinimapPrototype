@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://br86le2x53ye"]
+
+[ext_resource type="Script" path="res://radar.gd" id="1_8ykjt"]
+[ext_resource type="Texture2D" uid="uid://o3njn1meucj7" path="res://7e7z58m2fwe71.png" id="1_184ib"]
+[ext_resource type="Texture2D" uid="uid://dgs47bnc8lh0r" path="res://player.png" id="1_xc26c"]
+[ext_resource type="Script" path="res://radar_ui.gd" id="2_4wvp8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0jp7e"]
+radius = 8.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ieafg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56kcv"]
+size = Vector2(0.0315789, 97)
+
+[node name="Radar" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_8ykjt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(100, 100)
+shape = SubResource("CircleShape2D_0jp7e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RadarUI" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_right = 200.0
+grow_vertical = 0
+script = ExtResource("2_4wvp8")
+
+[node name="Radar" type="TextureRect" parent="CanvasLayer/RadarUI"]
+layout_mode = 2
+texture = ExtResource("1_184ib")
+expand_mode = 4
+
+[node name="Player" type="Sprite2D" parent="CanvasLayer/RadarUI/Radar"]
+position = Vector2(100, 100)
+scale = Vector2(16, 16)
+texture = ExtResource("1_xc26c")
+
+[node name="SensorRotation" type="Node2D" parent="CanvasLayer/RadarUI/Radar"]
+position = Vector2(100, 100)
+scale = Vector2(95, 1)
+
+[node name="Sensor" type="Sprite2D" parent="CanvasLayer/RadarUI/Radar/SensorRotation"]
+position = Vector2(0.494737, 0)
+texture = SubResource("PlaceholderTexture2D_ieafg")
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/RadarUI/Radar/SensorRotation"]
+collision_mask = 96
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/RadarUI/Radar/SensorRotation/Area2D"]
+position = Vector2(0.494737, 0.5)
+shape = SubResource("RectangleShape2D_56kcv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="CanvasLayer/RadarUI/Radar/SensorRotation/Area2D" to="." method="_on_area_2d_area_entered"]

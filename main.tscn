@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5fcok24tt0uv"]
+
+[ext_resource type="PackedScene" uid="uid://bicx5bb35kcuv" path="res://player.tscn" id="1_3f6ph"]
+[ext_resource type="PackedScene" uid="uid://htw44gorh1ey" path="res://object.tscn" id="2_p68bx"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_3f6ph")]
+position = Vector2(226, 67)
+
+[node name="RadarUI" parent="Player/Radar/CanvasLayer" index="0"]
+zoom_scale = 0.124
+radar_radius = 95.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Object" parent="." instance=ExtResource("2_p68bx")]
+position = Vector2(-309, 118)
+
+[editable path="Player"]
+[editable path="Player/Radar"]
